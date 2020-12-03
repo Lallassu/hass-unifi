@@ -14,12 +14,24 @@ The detection is performed using OpenCV in combination with YOLOv3.
 Weights is downloaded here (download yolov3.weights):
 https://github.com/ultralytics/yolov3/releases
 
+** Note that this has been implemented to support cameras of older versions that lacks person detection from Unifi. Should also work with any camera that produces video files **
+
 ## Detection
 This works rather fast on low-scale platforms such as old laptops etc. It may have some 
 miss-matches but usually works really well.
 
 It has been developed to be used with low end platforms, hence it might require some 
 tweaking to work faster/better precision with more resourceful platforms.
+
+The detection is performed in the following way:
+1. Traverse all video chunks the last day per camera
+2. If already in database, skip.
+3. If not in database, perform detection every 15 frame (cofigurable), to match 1 frame/sec in the video.
+4. If a match, it will skip detection of the rest of the videos in that directory (for that camera). But it will mark the rest of the files as checked. This is to improve performance and only larm once and perform detection once per set of chunks.
+5. If a person is detected. The image is saved to the database and a simple webpage is generated with the last <configured> snapshots.
+ 
+## Installation
+You can use the service file and enable it in systemd. Or just run it as is. Setup the `config.ini` with the configuration for your system. Make sure python3 and all used libraries are installed. 
 
 ## Hass Example Configuration
 HASS MQTT Configuration (configuration.yaml):
