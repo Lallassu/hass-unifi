@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Person Detections</title>
+    <!-- jQuery 1.8 or later, 33 KB -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- Fotorama from CDNJS, 19 KB -->
+    <link  href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
+</head>
+<body style="background: #000000;">
+    <center>
+    <div class="fotorama" data-nav="thumbs" data-width="900" data-ratio="3/2">
+    {% for d in detections %}
+        <a href="{{- d["large"]}}"><img src="{{- d["large"] }}"></a>
+    {%- endfor %}
+    </div>
+    </center>
+</body>
+</html>

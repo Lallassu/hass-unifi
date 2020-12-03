@@ -1,0 +1,15 @@
+[Unit]
+Description=Hass Person Detection
+After=multi-user.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/user/hass/hpd
+User=root
+ExecStart=/home/user/hass/hpd/detection.py config.ini
+StandardError=syslog
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
